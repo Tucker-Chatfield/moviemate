@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
+from django.contrib.auth.models import User
 
 TIMES = (
   ('F', 'First'),
@@ -23,6 +25,7 @@ class Movie(models.Model):
   description = models.TextField(max_length=250)
   release = models.IntegerField()
   ratings = models.ManyToManyField(Rating)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
     return self.name

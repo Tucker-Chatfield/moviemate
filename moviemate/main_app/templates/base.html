@@ -21,11 +21,23 @@
       </div>
       <nav>
         <ul>
-          <li><a href="{% url 'movie_index' %}">All Movies</a></li>
-          <li><a href="{% url 'rating_index' %}">All Ratings</a></li>
-          <li><a href="{% url 'movie_create' %}">Add a Movie</a></li>
-          <li><a href="{% url 'rating_create' %}"></a>Add a Rating</li>
-          <li><a href="{% url 'about' %}">About</a></li>
+          {% if user.is_authenticated %}  
+            <li><a href="{% url 'movie_index' %}">All Movies</a></li>
+            <li><a href="{% url 'rating_index' %}">All Ratings</a></li>
+            <li><a href="{% url 'movie_create' %}">Add a Movie</a></li>
+            <li><a href="{% url 'rating_create' %}"></a>Add a Rating</li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li>
+              <form id="logout-form" method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Log out</button>
+              </form>
+            </li>
+          {% else %}
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'home' %}">Login</a></li>
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+          {% endif %}
         </ul>
       </nav>
     </header>

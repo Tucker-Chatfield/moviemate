@@ -1,0 +1,30 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/ratings/rating_index.css' %}" />
+{% endblock %} 
+{% block content %}
+
+<section class="page-header">
+  <h1>All Movie Ratings</h1>
+  <img src="{% static '' %}" alt="A thumbs up" />
+  <img src="{% static '' %}" alt="A thumbs down" />
+  <img src="{% static '' %}" alt="A Smiling face" />
+  <img src="{% static '' %}" alt="A frowning face" />
+</section>
+
+<section class="card-container">
+  {% for rating in rating_list %}
+    <div class="card" style="border-color: {{ rating.color }}">
+      <div class="card-bg" style="background-color: {{ rating.color }}"></div>
+      <a href="{% url 'rating_detail' rating.id %}">
+        <div class="card-content">
+          <h2>{{ rating.name }}</h2>
+          <p>A {{ rating.color }} rating</p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</section>
+
+{% endblock %}

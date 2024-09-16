@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/movies/movie_index.css' %}"/>
+{% endblock %} 
+{% block content %}
+
+<section class="page-header">
+  <h1>movieList</h1>
+  <img src="{% static '' %}" alt="A cool movie" />
+  <img src="{% static '' %}" alt="A happy movie" />
+  <img src="{% static '' %}" alt="A movie in a teacup" />
+  <img src="{% static '' %}" alt="A movie in a box" />
+</section>
+
+<section class="card-container">
+  {% for movie in movies %}
+    <div class="card">
+      <a href="{% url 'movie_detail' movie.id %}">
+        <div class="card-content">
+          <div class="card-img-container">
+            <img
+              src="{% static '' %} "alt="A skater boy movie" />
+          </div>
+          <h2 class="card-title">{{ movie.name }}</h2>
+          {% if movie.release > 0 %}
+          <p>Released in {{ movie.release }}</p>
+          {% else %}
+          <p>A {{ movie.genre }} film.</p>
+          {% endif %}
+          <p><small>{{ movie.description }}</small></p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
